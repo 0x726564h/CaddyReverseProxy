@@ -31,8 +31,8 @@ tor
 ### Клонирование репозитория и сборка
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/ваш_репозиторий.git
-   cd ваш_репозиторий
+   git clone https://github.com/0x726564h/CaddyReverseProxy
+   cd CaddyReverseProxy
    ```
 
 2. Соберите проект:
