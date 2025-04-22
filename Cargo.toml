@@ -12,3 +12,6 @@ env_logger = "0.10" # Логирование в stdout/stderr
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] } # Для выполнения асинхронных тестов
+
+[profile.release]
+opt-level = 3 # Оптимизация для релиза
