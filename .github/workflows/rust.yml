@@ -1,0 +1,49 @@
+name: Rust CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг 1: Получение кода
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Шаг 2: Установка Rust
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      # Шаг 3: Установка зависимостей
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y tor
+
+      # Шаг 4: Сборка проекта
+      - name: Build project
+        run: cargo build --release
+
+      # Шаг 5: Запуск тестов
+      - name: Run tests
+        run: cargo test --verbose
+
+      # Шаг 6: Проверка форматирования
+      - name: Check code formatting
+        run: cargo fmt --all -- --check
+
+      # Шаг 7: Линтинг кода с помощью Clippy
+      - name: Lint with Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      # Шаг 8: Проверка, что проект компилируется в релизе
+      - name: Verify release build
+        run: cargo build --release
